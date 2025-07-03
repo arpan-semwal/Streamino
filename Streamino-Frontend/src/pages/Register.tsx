@@ -1,44 +1,85 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import InputField from '../components/InputFiled';
+import { registerUser } from '../services/authServices';
+import type { RegisterForm } from '../types/User';
 
 const Register: React.FC = () => {
-  return (
-    <div className=" ">
-      {/* Card */}
-      <div className=" ">
-        <h2 className=" ">
-          Create an Account
-        </h2>
+  const [formData, setFormData] = useState<RegisterForm>({
+    fullName: '',
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
-        <form className="space-y-4">
-          <input
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    try {
+      const res = await registerUser(formData);
+      console.log('✅ Registered:', res);
+      alert('Registered successfully!');
+    } catch (error: any) {
+      console.error('❌ Error registering:', error.response?.data || error.message);
+      alert('Registration failed');
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Create an Account</h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <InputField
             type="text"
             placeholder="Full Name"
-            className= ""
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
           />
-          <input
+          <InputField
             type="text"
             placeholder="Username"
-            className=" "
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
           />
-          <input
+          <InputField
             type="email"
             placeholder="Email"
-            className=" "
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
-          <input
+          <InputField
             type="password"
             placeholder="Password"
-            className=" px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
           />
-          <input
+          <InputField
             type="password"
             placeholder="Confirm Password"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
           />
+
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-medium transition"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition"
           >
             Register
           </button>
@@ -52,7 +93,7 @@ const Register: React.FC = () => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
