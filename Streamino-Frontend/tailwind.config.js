@@ -1,11 +1,11 @@
-// tailwind.config.js
-export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}', // ✅ Must match file structure
-  ],
+module.exports = {
+  content: ['./src/**/*.{html,js}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customBlue: '#1E40AF',
+      },
+    },
   },
   plugins: [],
-}
+};
