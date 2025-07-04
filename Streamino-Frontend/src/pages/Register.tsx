@@ -1,10 +1,16 @@
+// React and hooks import
 import React, { useState } from 'react';
+// Link is used for navigating to login after registration
 import { Link } from 'react-router-dom';
+// Reusable input component for DRY code
 import InputField from '../components/InputFiled';
+// Function to make API call to register user
 import { registerUser } from '../services/authServices';
+// TypeScript type for form structure
 import type { RegisterForm } from '../types/User';
 
 const Register: React.FC = () => {
+  // Local state to store form data using useState hook
   const [formData, setFormData] = useState<RegisterForm>({
     fullName: '',
     username: '',
@@ -13,12 +19,28 @@ const Register: React.FC = () => {
     confirmPassword: '',
   });
 
+  /**
+   * 🔁 handleChange
+   * Called when any input field changes.
+   * - Uses event delegation (`e.target.name`) to update specific field in `formData`.
+   * - React.ChangeEvent<HTMLInputElement> is a TS type for input events.
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value, // dynamic key update
+    });
   };
 
+  /**
+   * 📨 handleSubmit
+   * Called when the user clicks "Register"
+   * - Prevents form reload
+   * - Validates password match
+   * - Calls `registerUser` API and handles success or error
+   */
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // prevents page refresh on form submit
 
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match');
@@ -26,7 +48,7 @@ const Register: React.FC = () => {
     }
 
     try {
-      const res = await registerUser(formData);
+      const res = await registerUser(formData); // backend API call
       console.log('✅ Registered:', res);
       alert('Registered successfully!');
     } catch (error: any) {
@@ -35,11 +57,15 @@ const Register: React.FC = () => {
     }
   };
 
+  // 🧱 UI JSX for register form inside a responsive card
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Create an Account</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          Create an Account
+        </h2>
 
+        {/* 📋 Register Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <InputField
             type="text"
@@ -77,6 +103,7 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition"
@@ -85,6 +112,7 @@ const Register: React.FC = () => {
           </button>
         </form>
 
+        {/* Link to login page */}
         <p className="mt-4 text-center text-sm text-gray-600">
           Already have an account?{' '}
           <Link to="/login" className="text-blue-600 hover:underline">
