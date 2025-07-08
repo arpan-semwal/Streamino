@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import User from "../models/User";
+import { generateStreamKey } from "../utils/StreamKey";
 
 export const registerUser = async(req:Request , res:Response) => {
 	try{
+		const streamKey = generateStreamKey();
 		const {fullName , username , email , password} = req.body;
-		const user = new User({fullName , username , email , password});
+		const user = new User({fullName , username , email , password , streamKey});
 		await user.save();
 		
 		res.status(201).json({message:"User registered successfully"});
