@@ -1,6 +1,6 @@
-import axios from 'axios';
-
-const API = 'http://localhost:5000/api/auth';
+// src/services/authServices.ts
+import { type LoginForm } from '../types/User';
+import API from '../utils/api';
 
 export const registerUser = async (userData: {
   fullName: string;
@@ -8,6 +8,11 @@ export const registerUser = async (userData: {
   email: string;
   password: string;
 }) => {
-  const response = await axios.post(`${API}/register`, userData);
+  const response = await API.post('/auth/register', userData);
+  return response.data;
+};
+
+export const loginUser = async (formData: LoginForm) => {
+  const response = await API.post('/auth/login', formData);
   return response.data;
 };
