@@ -1,13 +1,13 @@
 // React and hooks import
 import React, { useState } from 'react';
 // Link is used for navigating to login after registration
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useNavigation } from 'react-router-dom';
 // Reusable input component for DRY code
 import InputField from '../components/InputFiled';
 // Function to make API call to register user
 import { registerUser } from '../services/authServices';
 // TypeScript type for form structure
-import type { RegisterForm } from '../types/User';
+import type { RegisterForm } from '../types/User'; 
 
 const Register: React.FC = () => {
   // Local state to store form data using useState hook
@@ -18,6 +18,8 @@ const Register: React.FC = () => {
     password: '',
     confirmPassword: '',
   });
+  
+  const navigate = useNavigate();
 
   /**
    * 🔁 handleChange
@@ -39,23 +41,35 @@ const Register: React.FC = () => {
    * - Validates password match
    * - Calls `registerUser` API and handles success or error
    */
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // prevents page refresh on form submit
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
+  if (formData.password !== formData.confirmPassword) {
+    alert('Passwords do not match');
+    return;
+  }
 
-    try {
-      const res = await registerUser(formData); // backend API call
-      console.log('✅ Registered:', res);
+  try {
+    const res = await registerUser(formData);
+    
+
+    console.log('✅ Registered:', res);
+    
+    // Save user to localStorage
+    if (res.user) {
+      localStorage.setItem('user', JSON.stringify(res.user));
       alert('Registered successfully!');
-    } catch (error: any) {
-      console.error('❌ Error registering:', error.response?.data || error.message);
-      alert('Registration failed');
+      navigate("/stream/create");
+      
+    } else {
+      alert('Something went wrong: user not returned from API');
     }
-  };
+
+  } catch (error: any) {
+    console.error('❌ Error registering:', error.response?.data || error.message);
+    alert('Registration failed');
+  }
+};
 
   // 🧱 UI JSX for register form inside a responsive card
   return (

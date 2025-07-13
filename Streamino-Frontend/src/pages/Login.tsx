@@ -16,19 +16,26 @@ const Login: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    try {
-      const res = await loginUser(formData);
-      console.log('✅ Logged in:', res);
+  try {
+    const res = await loginUser(formData);
+
+    if (res.user) {
+      localStorage.setItem('user', JSON.stringify(res.user));
       alert('Login successful!');
-      navigate('/stream'); // redirect to stream page or dashboard
-    } catch (error: any) {
-      console.error('❌ Login failed:', error.response?.data || error.message);
-      alert('Login failed!');
+      navigate("/stream/create");
+     
+    } else {
+      alert('Login failed: No user returned');
     }
-  };
+
+  } catch (error: any) {
+    console.error('❌ Login failed:', error.response?.data || error.message);
+    alert('Login failed!');
+  }
+};
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">

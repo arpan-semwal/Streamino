@@ -9,7 +9,7 @@ export const registerUser = async(req:Request , res:Response) => {
 		const user = new User({fullName , username , email , password , streamKey});
 		await user.save();
 		
-		res.status(201).json({message:"User registered successfully"});
+		res.status(201).json({message:"User registered successfully" , user});
 		
 	} catch(error:any){
 		res.status(400).json({error:error.message});
@@ -26,7 +26,7 @@ export const loginUser = async(req:Request , res:Response) => {
 			return res.status(401).json({message:"Invalid Credentials"})
 		}
 		
-		res.status(200).json({message:"Login Complete"});
+		res.status(200).json({message:"Login Complete" , user});
 	} 
 	
 	catch(error){
