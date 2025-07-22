@@ -25,7 +25,7 @@ const Login: React.FC = () => {
     if (res.user) {
       localStorage.setItem('user', JSON.stringify(res.user));
       alert('Login successful!');
-      navigate("/stream/create");
+      navigate("/dashboard");
      
     } else {
       alert('Login failed: No user returned');

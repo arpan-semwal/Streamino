@@ -6,7 +6,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import StreamSetup from './pages/StreamSetup';
 import WatchStream from './components/WatchStream';
- 
+import Dashboard from './pages/Dashboard';
+import LiveStream from './pages/LiveStream';
 
 
 
@@ -23,6 +24,8 @@ const App:React.FC = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path="/stream/create" element={<StreamSetup />} />
         <Route path="/watch/:streamKey" element={<WatchStream/>} />
+        <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/stream' element={<LiveStream/>}/>
       </Routes>
     </Router>
   )
