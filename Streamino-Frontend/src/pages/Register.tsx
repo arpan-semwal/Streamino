@@ -49,16 +49,18 @@ const Register: React.FC = () => {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen w-full bg-cover bg-center bg-no-repeat px-4 sm:px-6 md:px-8"
-      style={{ backgroundImage: 'url(/dark.jpg)' }}
+      className="flex items-center justify-end min-h-screen w-full bg-cover bg-center bg-no-repeat px-4 sm:px-6 md:px-8"
+      style={{ backgroundImage: 'url(/streamer.gif)' }}
     >
-      <div className="w-full max-w-md   rounded-2xl shadow-xl p-6 sm:p-8">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">
+     <div className="	bg-[#1e1e2e] w-full max-w-md bg-opacity-10 backdrop-blur-sm  border-white border-opacity-40 rounded-2xl shadow-2xl p-6 sm:p-8 text-white">
+
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#e0d7ff] mb-6">
           Create an Account
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <InputField
+          
             type="text"
             placeholder="Full Name"
             name="fullName"
@@ -96,7 +98,7 @@ const Register: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition duration-300"
+            className="w-full bg-gradient-to-r orange-400 from-pink-500  hover:bg-blue-700 text-white py-2 rounded-lg transition duration-300"
           >
             Register
           </button>

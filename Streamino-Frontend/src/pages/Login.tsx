@@ -38,11 +38,11 @@ const Login: React.FC = () => {
 };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+    <div className="flex items-center justify-end min-h-screen bg-gray-100 px-4 bg-no-repeat bg-cover bg-center w-full sm:px-8 md:px-8" style={{backgroundImage: "url(/streamer.gif)"}}>
+      <div className="	bg-[#1e1e2e] w-full max-w-md bg-opacity-10 backdrop-blur-sm  border-white border-opacity-40 rounded-2xl shadow-2xl p-6 sm:p-8 text-white">
+        <h2 className="text-2xl font-bold text-center text-[#e0d7ff] mb-6">Login</h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" autoComplete='off'>
           <InputField
             type="email"
             placeholder="Email"
@@ -60,7 +60,7 @@ const Login: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition"
+            className="w-full bg-gradient-to-r orange-400 from-pink-500  hover:bg-blue-700 text-white py-2 rounded-lg transition duration-300"
           >
             Login
           </button>

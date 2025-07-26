@@ -18,8 +18,8 @@ const InputField :React.FC<InputFieldProps> = ({type , placeholder , value , onC
 			value={value}
 			onChange={onChange}
 			name={name}
-			className="w-full px-4 py-2 rounded-lg bg-transparent focus:outline-none border-6 border-white  placeholder:white  text-amber-300 "
-			//w-full px-4 py-2 rounded-lg bg-transparent focus:outline-none border-2 border-white text-white placeholder-white ${props.className}`}
+			className="w-full px-4 py-2 rounded-lg bg-transparent text-white placeholder-[#a69cc1] border-2 border-[#d67eff] focus:outline-none focus:ring-2 focus:ring-[#ff9a63] focus:bg-transparent"
+			 
 		/>
 	);
 };
