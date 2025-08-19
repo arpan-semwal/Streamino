@@ -19,30 +19,21 @@ const Dashboard: React.FC = () => {
   //const handleLogout = () => {
   //  localStorage.removeItem("user");
   //  navigate("/login");
-  //};                
+  //};
 
   return (
-    
-  
-    <div className="flex flex-col h-screen">
-      
-      
-      
+    <div className="flex flex-col h-screen fixed left-0 right-0 top-0 bg-white z-10 shadow">
       <div className="h-16">
-           <Navbar/>
+        <Navbar />
       </div>
-      
-      <div className="flex flex-1">
-          <div className="flex flex-1">
-        <Sidebar/>
+
+      <div className="flex flex-1 h-screen">
+        <div>
+          <Sidebar />
+        </div>
+
+        <div className="flex-1">content</div>
       </div>
-      
-      <div className="flex-1">    
-        content  
-       </div>
-      </div>
-    
-     
     </div>
   );
 };
