@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Sidebar: React.FC = () => {
   const users = [

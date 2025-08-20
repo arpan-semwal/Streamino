@@ -1,11 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+ 
 //import { LogOut, PlayCircle, Video } from "lucide-react"; // for icons
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import MainContentDashboard from "../components/Dashboard/MainContentDashboard";
 
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate();
+ 
   //const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   //const handleGoLive = () => {
@@ -32,7 +33,9 @@ const Dashboard: React.FC = () => {
           <Sidebar />
         </div>
 
-        <div className="flex-1">content</div>
+        <div className="flex-1">
+          <MainContentDashboard/>
+        </div>
       </div>
     </div>
   );
